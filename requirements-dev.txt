@@ -1,0 +1,4 @@
+pytest>=8
+pytest-timeout>=2.3
+opentelemetry-sdk>=1.20
+opentelemetry-exporter-otlp-proto-http>=1.20

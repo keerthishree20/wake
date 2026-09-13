@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wake-traces"
+version = "1.0.0"
+description = "An OpenTelemetry trace collector: OTLP ingest, cross-service stitching, SQLite storage, flame graphs."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# About three times faster protobuf decoding. Wake works without it.
+fast = ["opentelemetry-proto>=1.20"]
+dev = ["pytest>=8", "pytest-timeout>=2.3", "opentelemetry-sdk>=1.20",
+       "opentelemetry-exporter-otlp-proto-http>=1.20"]
+
+[project.scripts]
+wake = "wake.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["wake*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --timeout=120"

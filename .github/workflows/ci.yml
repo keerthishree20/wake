@@ -1,0 +1,26 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      # The OpenTelemetry SDK is a test dependency only. It is what proves Wake
+      # reads real exporter output, including over HTTP.
+      - name: Install test tools
+        run: pip install -r requirements-dev.txt
+      - name: Test with the library decoder available
+        run: python -m pytest -q
+      - name: Test forcing the hand-written decoder
+        run: WAKE_PURE_PROTOBUF=1 python -m pytest -q
