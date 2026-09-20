@@ -1,5 +1,7 @@
 # Wake
 
+[![tests](https://github.com/keerthishree20/wake/actions/workflows/ci.yml/badge.svg)](https://github.com/keerthishree20/wake/actions/workflows/ci.yml)
+
 An OpenTelemetry trace collector. It accepts spans over OTLP, stitches them into
 traces across services, stores them in SQLite, and serves flame charts and flame
 graphs. No runtime dependencies.
